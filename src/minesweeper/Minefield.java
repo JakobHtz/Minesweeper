@@ -15,7 +15,7 @@ public class Minefield {
 	private final int Y_DIM;
 	
 	/**
-	 * Initializes minesweeper mine field
+	 * Initializes minesweeper minefield
 	 * @param xDim Size of mine field in x direction
 	 * @param yDim Size of mine field in y direction
 	 * @param startClick Field on which the player clicked
@@ -29,6 +29,11 @@ public class Minefield {
 		this.field = calcMineField();
 	}
 	
+	/**
+	 * Initializes empty minefield
+	 * @param xDim Size of mine field in x direction
+	 * @param yDim Size of mine field in y direction
+	 */
 	public Minefield(int xDim, int yDim) {
 		this.X_DIM = xDim>3?xDim:3;
 		this.Y_DIM = yDim>3?yDim:3;
@@ -38,7 +43,7 @@ public class Minefield {
 	}
 	
 	/**
-	 * Returns the mine count of the mine field as String
+	 * Returns the mine count of the minefield as String
 	 * @return String filed attribute of instance
 	 */
 	@Override
@@ -61,8 +66,8 @@ public class Minefield {
 	}
 	
 	/**
-	 * Calculates mine count of mine field
-	 * @return Integer array mine field of this instance
+	 * Calculates mine count of minefield
+	 * @return Integer array minefield of this instance
 	 */
 	private GridElement[] calcMineField() {
 		GridElement[] field = new GridElement[this.minefield.length];

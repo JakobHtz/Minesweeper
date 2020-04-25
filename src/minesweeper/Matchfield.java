@@ -3,7 +3,6 @@ package minesweeper;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -22,7 +21,7 @@ public class Matchfield{
 	
 	/**
 	 * Initializes a match field for the game
-	 * @param minefield Mine field
+	 * @param mf Minefield
 	 */
 	public Matchfield(Minefield mf) {
 		this.minefield = mf;
@@ -37,13 +36,20 @@ public class Matchfield{
 			public void mouseEntered(MouseEvent e) {}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (e.getX()-BORDER_SIZE > GRID_SIZE*minefield.getxDim()||
+						e.getY()-BOX_SIZE-INTERFACE_SIZE-BORDER_SIZE > GRID_SIZE*minefield.getyDim()||
+						e.getX() < BORDER_SIZE||
+						e.getY() < BOX_SIZE+INTERFACE_SIZE+BORDER_SIZE) 
+					return;
 				int gridIndexClicked = ((e.getX()-BORDER_SIZE)/GRID_SIZE)+((e.getY()-BOX_SIZE-INTERFACE_SIZE-BORDER_SIZE)/GRID_SIZE)*minefield.getxDim();
 				if (minefield.getMineCount()==0) {
-					minefield = new Minefield(minefield.getxDim(), minefield.getyDim(), gridIndexClicked, 100);
+					minefield = new Minefield(minefield.getxDim(), minefield.getyDim(), gridIndexClicked, 200);
 				}
 				if (SwingUtilities.isLeftMouseButton(e)) {
-					System.out.println("LeftClick at x: " + e.getX() + " ,y: " + e.getY() + " " + gridIndexClicked);
-					minefieldClicked(gridIndexClicked);
+					if (!(minefield.getStatusAtIndex(gridIndexClicked)==GridElement.TileStatus.MARKED)) {
+						System.out.println("LeftClick at x: " + e.getX() + " ,y: " + e.getY() + " " + gridIndexClicked);
+						minefieldClicked(gridIndexClicked);
+					}
 				} else if (SwingUtilities.isRightMouseButton(e)) {
 					System.out.println("RightClick at x: " + e.getX() + " ,y: " + e.getY() + " " + gridIndexClicked);
 					if (!(minefield.getStatusAtIndex(gridIndexClicked)==GridElement.TileStatus.KNOWN)) {
