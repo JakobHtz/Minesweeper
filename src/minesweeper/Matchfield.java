@@ -3,7 +3,6 @@ package minesweeper;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
-
 import javax.swing.*;
 
 /**
@@ -43,7 +42,7 @@ public class Matchfield{
 					return;
 				int gridIndexClicked = ((e.getX()-BORDER_SIZE)/GRID_SIZE)+((e.getY()-BOX_SIZE-INTERFACE_SIZE-BORDER_SIZE)/GRID_SIZE)*minefield.getxDim();
 				if (minefield.getMineCount()==0) {
-					minefield = new Minefield(minefield.getxDim(), minefield.getyDim(), gridIndexClicked, 200);
+					minefield = new Minefield(minefield.getxDim(), minefield.getyDim(), gridIndexClicked, 150);
 				}
 				if (SwingUtilities.isLeftMouseButton(e)) {
 					if (!(minefield.getStatusAtIndex(gridIndexClicked)==GridElement.TileStatus.MARKED)) {
