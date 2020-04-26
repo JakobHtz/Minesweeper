@@ -34,6 +34,6 @@ public class GridElement {
 		return this.elementStatus;
 	}
 	public enum TileStatus {
-		UNKNOWN,MARKED,KNOWN
+		UNKNOWN,MARKED,KNOWN,GAME_OVER
 	};
 }

@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"minesweeper","l":"GridElement"},{"p":"minesweeper","l":"Matchfield"},{"p":"minesweeper","l":"Minefield"},{"p":"minesweeper","l":"GridElement.TileStatus"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"minesweeper","l":"Minefield"}]
