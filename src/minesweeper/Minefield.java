@@ -16,8 +16,10 @@ public class Minefield {
 	private final int MINE_COUNT;
 	private final int X_DIM;
 	private final int Y_DIM;
+	private int tilesMarked = 0;
 	private int minesMarked = 0;
 	private boolean gameOver = false;
+	private boolean gameWon = false;
 	
 	/**
 	 * Initializes minesweeper minefield
@@ -585,7 +587,7 @@ public class Minefield {
 				} else if (this.getMineCountAtIndex(gridIndexClicked)<9) {
 					this.setStatusAtIndex(gridIndexClicked, GridElement.TileStatus.KNOWN);
 				} else {
-					gameOver = true;
+					this.gameOver = true;
 					this.setStatusAtIndex(gridIndexClicked, TileStatus.GAME_OVER);
 					System.out.println("Game Over!");
 				}
@@ -596,10 +598,17 @@ public class Minefield {
 			if (!(this.getStatusAtIndex(gridIndexClicked)==GridElement.TileStatus.KNOWN)) {
 				if (this.getStatusAtIndex(gridIndexClicked)==GridElement.TileStatus.MARKED) {
 					this.setStatusAtIndex(gridIndexClicked, GridElement.TileStatus.UNKNOWN);
-					minesMarked--;
+					if (this.getMineCountAtIndex(gridIndexClicked)==9) 
+						this.minesMarked--;
+					this.tilesMarked--;
 				} else {
 					this.setStatusAtIndex(gridIndexClicked, GridElement.TileStatus.MARKED);
-					minesMarked++;
+					if (this.getMineCountAtIndex(gridIndexClicked)==9) 
+						this.minesMarked++;
+					this.tilesMarked++;
+					if (this.minesMarked == this.MINE_COUNT) {
+						this.gameWon = true;
+					}
 				}
 			}
 		}
@@ -1220,7 +1229,7 @@ public class Minefield {
 		return color;
 	}
 	public int getMineCount() {
-		return MINE_COUNT;
+		return this.MINE_COUNT;
 	}
 	public boolean isGameOver() {
 		return this.gameOver;
@@ -1228,14 +1237,17 @@ public class Minefield {
 	public void gameOver() {
 		this.gameOver = true;
 	}
-	public int getMinesMarked() {
-		return this.minesMarked;
+	public int getTilesMarked() {
+		return this.tilesMarked;
 	}
 	public int getxDim() {
-		return X_DIM;
+		return this.X_DIM;
 	}
 	public int getyDim() {
-		return Y_DIM;
+		return this.Y_DIM;
+	}
+	public boolean getGameWon() {
+		return this.gameWon;
 	}
 	public GridElement.TileStatus getStatusAtIndex(int index) {
 		return this.field[index].getMineMarker();
@@ -1244,6 +1256,6 @@ public class Minefield {
 		this.field[index].setMineMarker(statusColor);;
 	}
 	public int getMineCountAtIndex(int gridIndex) {
-		return field[gridIndex].getMineCount();
+		return this.field[gridIndex].getMineCount();
 	}
 }

@@ -60,7 +60,7 @@ public class Matchfield{
 				int gridIndexClicked = ((e.getX()-BORDER_SIZE)/GRID_SIZE)+((e.getY()-BOX_SIZE-INTERFACE_SIZE-BORDER_SIZE)/GRID_SIZE)*minefield.getxDim();
 				if (buttonClicked==1) {
 					if (minefield.getMineCount()==0) {
-						minefield = new Minefield(minefield.getxDim(), minefield.getyDim(), gridIndexClicked, 16);
+						minefield = new Minefield(minefield.getxDim(), minefield.getyDim(), gridIndexClicked, 40);
 					}
 				}
 				minefield.minefieldClicked(gridIndexClicked, buttonClicked);	
@@ -113,7 +113,12 @@ public class Matchfield{
 		g.setFont(font);
 		g.drawRect(BORDER_SIZE, BOX_SIZE+BORDER_SIZE, minefield.getxDim()*GRID_SIZE, INTERFACE_SIZE);
 		g.drawString("Reset", (int)(BORDER_SIZE+minefield.getxDim()*GRID_SIZE-BTN_WIDTH*(0.85)-BTN_BORDER), (int)(BOX_SIZE+BORDER_SIZE+(0.2)*BTN_HEIGHT+FONT_HEIGHT)+BTN_BORDER);
-		g.drawString("" + (minefield.getMineCount()-minefield.getMinesMarked()), BORDER_SIZE+FONT_HEIGHT, GRID_SIZE+BORDER_SIZE+20);
+		g.drawString("" + (minefield.getMineCount()-minefield.getTilesMarked()), BORDER_SIZE+FONT_HEIGHT, GRID_SIZE+BORDER_SIZE+20);
+		
+		g.setColor(Color.BLACK);
+		font = new Font("Verdana", Font.BOLD, 8);
+		if (this.minefield.getGameWon()) 
+			g.drawString("Game Won!!!", (int)(BORDER_SIZE+50), (int)(BOX_SIZE+BORDER_SIZE+(0.2)*BTN_HEIGHT+FONT_HEIGHT)+BTN_BORDER);
 	}
 	/**
 	 * Draws the grid
